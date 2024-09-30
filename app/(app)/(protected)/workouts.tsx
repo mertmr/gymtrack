@@ -1,10 +1,17 @@
-import React from 'react';
+import React from "react";
 import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
+
 import { Text } from "@/components/ui/text";
 import { H2, Muted } from "@/components/ui/typography";
-import { PlusIcon } from "lucide-react";
 
-const WorkoutItem = ({ name, duration, lastPerformed }) => (
+// type for WorkOutItem
+type WorkoutItemProps = {
+	name: string;
+	duration: number;
+	lastPerformed: string;
+};
+
+const WorkoutItem = ({ name, duration, lastPerformed }: WorkoutItemProps) => (
 	<TouchableOpacity className="bg-card p-4 rounded-lg mb-4">
 		<Text className="font-bold">{name}</Text>
 		<Muted>Duration: {duration} minutes</Muted>
@@ -45,15 +52,15 @@ export default function Workouts() {
 
 				<TouchableOpacity
 					style={{
-						position: 'absolute',
+						position: "absolute",
 						right: 20,
 						bottom: 20,
-						backgroundColor: '#007AFF',
+						backgroundColor: "#007AFF",
 						width: 56,
 						height: 56,
 						borderRadius: 28,
-						justifyContent: 'center',
-						alignItems: 'center',
+						justifyContent: "center",
+						alignItems: "center",
 						elevation: 6,
 						shadowColor: "#000",
 						shadowOffset: {
