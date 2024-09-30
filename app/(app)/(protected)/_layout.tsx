@@ -17,10 +17,11 @@ export default function ProtectedLayout() {
 							? theme.dark.background
 							: theme.light.background,
 				},
-				tabBarShowLabel: false,
+				tabBarShowLabel: true,
 			}}
 		>
 			<Tabs.Screen name="index" options={{ title: "Home" }} />
+			<Tabs.Screen name="workouts" options={{ title: "Workouts" }} />
 			<Tabs.Screen name="settings" options={{ title: "Settings" }} />
 		</Tabs>
 	);
