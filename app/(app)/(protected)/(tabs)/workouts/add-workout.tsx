@@ -47,7 +47,7 @@ export default function AddWorkout() {
 	return (
 		<SafeAreaView className="flex-1 bg-background p-4">
 			<View className="flex-1 gap-4 web:m-4">
-				<H1 className="self-start ">Sign In</H1>
+				<H1 className="self-start ">Sign Ins</H1>
 				<Form {...form}>
 					<View className="gap-4">
 						<FormField
@@ -86,6 +86,7 @@ export default function AddWorkout() {
 								<FormSelect
 									label="Category"
 									placeholder="Select a category"
+									onValueChange={field.onChange}
 									items={[
 										{ label: "Option 1", value: "option1" },
 										{ label: "Option 2", value: "option2" },

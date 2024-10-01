@@ -18,14 +18,14 @@ export default function Home() {
 	if (loading) return <ActivityIndicator />;
 
 	return (
-		<SafeAreaView style={{ flex: 1, backgroundColor: "background" }}>
+		<SafeAreaView className="flex-1 bg-background p-4">
 			<ScrollView className="flex-1">
 				<View className="p-4 gap-y-6">
 					<H1 className="text-center">
 						Welcome, {user?.email || "Gym Enthusiast"}!
 					</H1>
 
-					<View className="bg-card p-4 rounded-lg">
+					<View className="bg-card p-4 rounded-lg border border-border">
 						<H2>Today's Stats</H2>
 						<Text className="mt-2">Workouts Completed: 1</Text>
 						<Text>Total Time: 45 minutes</Text>
@@ -39,7 +39,6 @@ export default function Home() {
 						</Button>
 						<Button
 							className="w-full mb-2"
-							variant="outline"
 							onPress={() => router.push("/(app)/modal")}
 						>
 							<Text>View Workout History</Text>

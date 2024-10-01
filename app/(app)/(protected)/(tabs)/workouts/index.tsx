@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
 
 import { Text } from "@/components/ui/text";
 import { H2, Muted } from "@/components/ui/typography";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { Button } from "@/components/ui/button";
 
 // type for WorkOutItem
@@ -30,7 +30,7 @@ export default function Workouts() {
 	];
 
 	return (
-		<SafeAreaView style={{ flex: 1, backgroundColor: "background" }}>
+		<SafeAreaView className="flex-1 bg-background p-4">
 			<View style={{ flex: 1 }}>
 				<ScrollView className="flex-1">
 					<View className="p-4 gap-y-6">
@@ -53,32 +53,34 @@ export default function Workouts() {
 					</View>
 				</ScrollView>
 
-				<TouchableOpacity
-					style={{
-						position: "absolute",
-						right: 20,
-						bottom: 20,
-						backgroundColor: "#007AFF",
-						width: 56,
-						height: 56,
-						borderRadius: 28,
-						justifyContent: "center",
-						alignItems: "center",
-						elevation: 6,
-						shadowColor: "#000",
-						shadowOffset: {
-							width: 0,
-							height: 3,
-						},
-						shadowOpacity: 0.27,
-						shadowRadius: 4.65,
-					}}
-					onPress={() => {
-						router.push("/(app)/add-workout");
-					}}
+				<Link
+					href="/(app)/add-workout"
+					asChild
 				>
-					<Text style={{ color: "white", fontSize: 20 }}>+</Text>
-				</TouchableOpacity>
+					<TouchableOpacity
+						style={{
+							position: "absolute",
+							right: 20,
+							bottom: 20,
+							backgroundColor: "#007AFF",
+							width: 56,
+							height: 56,
+							borderRadius: 28,
+							justifyContent: "center",
+							alignItems: "center",
+							elevation: 6,
+							shadowColor: "#000",
+							shadowOffset: {
+								width: 0,
+								height: 3,
+							},
+							shadowOpacity: 0.27,
+							shadowRadius: 4.65,
+						}}
+					>
+						<Text style={{ color: "white", fontSize: 20 }}>+</Text>
+					</TouchableOpacity>
+				</Link>
 			</View>
 		</SafeAreaView>
 	);
