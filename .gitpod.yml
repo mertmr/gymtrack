@@ -6,8 +6,8 @@
 
 tasks:
   - init: |
-      npm install -g expo-cli
-      yarn install
-    command: npx expo android --tunnel
+      bun install -g expo-cli
+      bun install
+    command: bun expo --tunnel
 
 

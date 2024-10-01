@@ -32,10 +32,15 @@ export default function SignIn() {
 	async function onSubmit(data: z.infer<typeof formSchema>) {
 		try {
 			await signInWithPassword(data.email, data.password);
-
 			form.reset();
-		} catch (error: Error | any) {
-			console.log(error.message);
+		} catch (error: any) {
+			console.error('Sign in error:', error);
+			if (error.message === 'Network request failed') {
+				// You might want to use a toast or alert to show this message to the user
+				console.error('Network error. Please check your internet connection and try again.');
+			} else {
+				console.error('An unexpected error occurred. Please try again later.');
+			}
 		}
 	}
 

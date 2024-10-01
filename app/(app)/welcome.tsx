@@ -7,7 +7,6 @@ import { SafeAreaView } from "@/components/safe-area-view";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H1, Muted } from "@/components/ui/typography";
-import GoogleSignin from "@/components/gym-tracker/google-signin";
 
 export default function WelcomeScreen() {
 	const router = useRouter();
@@ -44,7 +43,7 @@ export default function WelcomeScreen() {
 				>
 					<Text>Sign In</Text>
 				</Button>
-				<GoogleSignin />
+				{/* <GoogleSignin /> */}
 			</View>
 		</SafeAreaView>
 	);

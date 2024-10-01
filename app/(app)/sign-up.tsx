@@ -55,7 +55,7 @@ export default function SignUp() {
 
 			form.reset();
 		} catch (error: Error | any) {
-			console.log(error.message);
+			console.log(error);
 		}
 	}
 

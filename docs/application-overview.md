@@ -29,11 +29,11 @@ cd expo-supabase-starter
 4. Install the required dependencies:
 
 ```bash
-yarn install
+bun install
 ```
 
 5. Start the Expo development server:
 
 ```bash
-yarn start
+bun start
 ```
