@@ -3,6 +3,7 @@
 tasks:
   - init: |
       curl -fsSL https://bun.sh/install | bash
+      source /home/gitpod/.bashrc
       bun install -g expo-cli
       bun install -g @expo/ngrok@^4.1.0
       bun install
