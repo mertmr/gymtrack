@@ -3,6 +3,8 @@ import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
 
 import { Text } from "@/components/ui/text";
 import { H2, Muted } from "@/components/ui/typography";
+import { useRouter } from "expo-router";
+import { Button } from "@/components/ui/button";
 
 // type for WorkOutItem
 type WorkoutItemProps = {
@@ -20,6 +22,7 @@ const WorkoutItem = ({ name, duration, lastPerformed }: WorkoutItemProps) => (
 );
 
 export default function Workouts() {
+	const router = useRouter();
 	const workouts = [
 		{ name: "Full Body Workout", duration: 60, lastPerformed: "2 days ago" },
 		{ name: "Upper Body Focus", duration: 45, lastPerformed: "5 days ago" },
@@ -71,7 +74,7 @@ export default function Workouts() {
 						shadowRadius: 4.65,
 					}}
 					onPress={() => {
-						console.log("Pressed");
+						router.push("/(app)/add-workout");
 					}}
 				>
 					<Text style={{ color: "white", fontSize: 20 }}>+</Text>

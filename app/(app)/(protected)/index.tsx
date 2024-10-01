@@ -1,6 +1,4 @@
-import { User } from "@supabase/supabase-js";
-// import { router } from "expo-router";
-import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 import {
 	ActivityIndicator,
 	SafeAreaView,
@@ -11,11 +9,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H1, H2, Muted } from "@/components/ui/typography";
-import { supabase } from "@/config/supabase";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/lib/useUser";
 
 export default function Home() {
 	const { user, loading } = useUser();
+	const router = useRouter();
 
 	if (loading) return <ActivityIndicator />;
 
@@ -42,7 +40,7 @@ export default function Home() {
 						<Button
 							className="w-full mb-2"
 							variant="outline"
-							onPress={() => {}}
+							onPress={() => router.push("/(app)/modal")}
 						>
 							<Text>View Workout History</Text>
 						</Button>
