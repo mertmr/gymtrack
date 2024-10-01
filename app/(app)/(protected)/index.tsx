@@ -1,25 +1,23 @@
 import { User } from "@supabase/supabase-js";
 // import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import {
+	ActivityIndicator,
+	SafeAreaView,
+	ScrollView,
+	View,
+} from "react-native";
 
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H1, H2, Muted } from "@/components/ui/typography";
 import { supabase } from "@/config/supabase";
+import { useUser } from "@/hooks/useUser";
 
 export default function Home() {
-	const [user, setUser] = useState<User | null>(null);
+	const { user, loading } = useUser();
 
-	useEffect(() => {
-		async function fetchUser() {
-			const {
-				data: { user },
-			} = await supabase.auth.getUser();
-			setUser(user);
-		}
-		fetchUser();
-	}, []);
+	if (loading) return <ActivityIndicator />;
 
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: "background" }}>
