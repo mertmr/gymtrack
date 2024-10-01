@@ -13,6 +13,7 @@ import Animated, { FadeInDown, FadeOut } from "react-native-reanimated";
 
 import { Input } from "./input";
 import { Label } from "./label";
+import { Select } from "./select";
 import { Text } from "./text";
 
 import { cn } from "@/lib/utils";
@@ -231,6 +232,52 @@ const FormInput = React.forwardRef<
 
 FormInput.displayName = "FormInput";
 
+const FormSelect = React.forwardRef<
+	React.ElementRef<typeof Select>,
+	FormItemProps<typeof Select, string>
+>(
+	(
+		{ label, description, onChange, onValueChange, items = [], ...props },
+		ref,
+	) => {
+		const {
+			error,
+			formItemNativeID,
+			formDescriptionNativeID,
+			formMessageNativeID,
+		} = useFormField();
+
+		// Handle both onChange and onValueChange
+		const handleChange = (value: string) => {
+			if (onChange) onChange(value);
+			if (onValueChange) onValueChange(value);
+		};
+
+		return (
+			<FormItem>
+				{!!label && <FormLabel nativeID={formItemNativeID}>{label}</FormLabel>}
+
+				<Select
+					aria-labelledby={formItemNativeID}
+					aria-describedby={
+						!error
+							? `${formDescriptionNativeID}`
+							: `${formDescriptionNativeID} ${formMessageNativeID}`
+					}
+					aria-invalid={!!error}
+					onValueChange={handleChange}
+					items={items}
+					{...props}
+				/>
+				{!!description && <FormDescription>{description}</FormDescription>}
+				<FormMessage />
+			</FormItem>
+		);
+	},
+);
+
+FormSelect.displayName = "FormSelect";
+
 export {
 	Form,
 	FormDescription,
@@ -239,5 +286,6 @@ export {
 	FormItem,
 	FormLabel,
 	FormMessage,
+	FormSelect,
 	useFormField,
 };
