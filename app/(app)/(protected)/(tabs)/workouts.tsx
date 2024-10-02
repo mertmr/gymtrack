@@ -14,7 +14,7 @@ type WorkoutItemProps = {
 };
 
 const WorkoutItem = ({ name, duration, lastPerformed }: WorkoutItemProps) => (
-	<TouchableOpacity className="bg-card p-4 rounded-lg mb-4">
+	<TouchableOpacity className="bg-card p-4 rounded-lg border border-border mb-4">
 		<Text className="font-bold">{name}</Text>
 		<Muted>Duration: {duration} minutes</Muted>
 		<Muted>Last performed: {lastPerformed}</Muted>
