@@ -1,11 +1,13 @@
 import { Stack } from 'expo-router'
 
-const StackLayout = () => {
+export const StackLayout = () => {
 	return (
 		<Stack screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="add-workout" options={{ presentation: "modal" }} />
+			<Stack.Screen name="index" options={{ presentation: "modal" }} />
+			{/* <Stack.Screen
+				name="add-workout/index"
+				options={{ presentation: "modal" }}
+			/> */}
 		</Stack>
 	);
-}
-
-export default StackLayout
+};

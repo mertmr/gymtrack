@@ -1,10 +1,10 @@
+import { Link, useRouter } from "expo-router";
 import React from "react";
 import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
 
+import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H2, Muted } from "@/components/ui/typography";
-import { Link, useRouter } from "expo-router";
-import { Button } from "@/components/ui/button";
 
 // type for WorkOutItem
 type WorkoutItemProps = {
@@ -53,10 +53,7 @@ export default function Workouts() {
 					</View>
 				</ScrollView>
 
-				<Link
-					href="/(app)/add-workout"
-					asChild
-				>
+				<Link href="/(app)/add-workout" asChild>
 					<TouchableOpacity
 						style={{
 							position: "absolute",
