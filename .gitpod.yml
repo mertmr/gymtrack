@@ -1,8 +1,8 @@
-
+image: gitpod/workspace-bun
 
 tasks:
   - init: |
-      curl -fsSL https://bun.sh/install | bash
-      source /home/gitpod/.bashrc
-      bun install -g expo-cli
       bun install
+    command: |
+      bun install -g expo-cli
+      bun expo --tunnel
