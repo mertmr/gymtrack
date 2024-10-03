@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, Keyboard, TouchableWithoutFeedback, View } from "react-native";
 import * as z from "zod";
 
 import { SafeAreaView } from "@/components/safe-area-view";
@@ -11,92 +11,87 @@ import { Text } from "@/components/ui/text";
 import { H1 } from "@/components/ui/typography";
 
 const formSchema = z.object({
-	email: z.string().email("Please enter a valid email address."),
-	password: z
-		.string()
-		.min(8, "Please enter at least 8 characters.")
-		.max(64, "Please enter fewer than 64 characters."),
+	name: z.string().min(1, "Please enter a workout name."),
+	date: z.string().min(1, "Please enter a date."),
+	duration: z.number().nullable(),
+	notes: z.string().nullable(),
 });
 
 export default function AddWorkout() {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			email: "",
-			password: "",
+			name: "",
+			date: new Date().toISOString().split("T")[0], // Current date as default
+			duration: null,
+			notes: null,
 		},
 	});
 
 	async function onSubmit(data: z.infer<typeof formSchema>) {
 		try {
 			console.log(data);
+			// Here you would typically send the data to your backend
 			form.reset();
 		} catch (error: any) {
-			console.error("Sign in error:", error);
-			if (error.message === "Network request failed") {
-				// You might want to use a toast or alert to show this message to the user
-				console.error(
-					"Network error. Please check your internet connection and try again.",
-				);
-			} else {
-				console.error("An unexpected error occurred. Please try again later.");
-			}
+			console.error("Add workout error:", error);
+			// Error handling...
 		}
 	}
 
 	return (
 		<SafeAreaView className="flex-1 bg-background p-4">
 			<View className="flex-1 gap-4 web:m-4">
-				<H1 className="self-start ">Sign Ins</H1>
+				<H1 className="self-start ">Add Workout</H1>
 				<Form {...form}>
-					<View className="gap-4">
-						<FormField
-							control={form.control}
-							name="email"
-							render={({ field }) => (
-								<FormInput
-									label="Email"
-									placeholder="Email"
-									autoCapitalize="none"
-									autoComplete="email"
-									autoCorrect={false}
-									keyboardType="email-address"
-									{...field}
-								/>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name="password"
-							render={({ field }) => (
-								<FormInput
-									label="Password"
-									placeholder="Password"
-									autoCapitalize="none"
-									autoCorrect={false}
-									secureTextEntry
-									{...field}
-								/>
-							)}
-						/>
-						<FormField
-							control={form.control}
-							name="email"
-							render={({ field }) => (
-								<FormSelect
-									label="Category"
-									placeholder="Select a category"
-									onValueChange={field.onChange}
-									items={[
-										{ label: "Option 1", value: "option1" },
-										{ label: "Option 2", value: "option2" },
-										{ label: "Option 3", value: "option3" },
-									]}
-									{...field}
-								/>
-							)}
-						/>
-					</View>
+					<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+						<View className="gap-4">
+							<FormField
+								control={form.control}
+								name="name"
+								render={({ field }) => (
+									<FormInput
+										label="Workout Name"
+										placeholder="Enter workout name"
+										{...field}
+									/>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="date"
+								render={({ field }) => (
+									<FormInput label="Date" placeholder="YYYY-MM-DD" {...field} />
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="duration"
+								render={({ field }) => (
+									<FormInput
+										label="Duration (minutes)"
+										placeholder="Enter duration"
+										keyboardType="numeric"
+										{...field}
+										onChange={(text) => field.onChange(text ? parseInt(text) : null)}
+									/>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="notes"
+								render={({ field }) => (
+									<FormInput
+										label="Notes"
+										placeholder="Enter any notes"
+										multiline
+										numberOfLines={4}
+										{...field}
+									/>
+								)}
+							/>
+						</View>
+					</TouchableWithoutFeedback>
 				</Form>
 			</View>
 			<Button
@@ -109,7 +104,7 @@ export default function AddWorkout() {
 				{form.formState.isSubmitting ? (
 					<ActivityIndicator size="small" />
 				) : (
-					<Text>Sign In</Text>
+					<Text>Add Workout</Text>
 				)}
 			</Button>
 		</SafeAreaView>

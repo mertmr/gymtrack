@@ -5,29 +5,25 @@ import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H2, Muted } from "@/components/ui/typography";
+import { supabase } from "@/config/supabase";
+import { useWorkouts } from "@/lib/useWorkouts";
 
 // type for WorkOutItem
 type WorkoutItemProps = {
 	name: string;
-	duration: number;
-	lastPerformed: string;
+	duration: number | null;
 };
 
-const WorkoutItem = ({ name, duration, lastPerformed }: WorkoutItemProps) => (
+const WorkoutItem = ({ name, duration }: WorkoutItemProps) => (
 	<TouchableOpacity className="bg-card p-4 rounded-lg border border-border mb-4">
 		<Text className="font-bold">{name}</Text>
 		<Muted>Duration: {duration} minutes</Muted>
-		<Muted>Last performed: {lastPerformed}</Muted>
+		{/* <Muted>Last performed: {lastPerformed}</Muted> */}
 	</TouchableOpacity>
 );
 
 export default function Workouts() {
-	const router = useRouter();
-	const workouts = [
-		{ name: "Full Body Workout", duration: 60, lastPerformed: "2 days ago" },
-		{ name: "Upper Body Focus", duration: 45, lastPerformed: "5 days ago" },
-		{ name: "Leg Day", duration: 50, lastPerformed: "1 week ago" },
-	];
+	const workouts = useWorkouts();
 
 	return (
 		<SafeAreaView className="flex-1 bg-background p-4">
@@ -36,7 +32,7 @@ export default function Workouts() {
 					<View className="p-4 gap-y-6">
 						<View>
 							<H2 className="mb-2">Your Workouts</H2>
-							{workouts.map((workout, index) => (
+							{workouts.workoutList?.map((workout, index) => (
 								<WorkoutItem key={index} {...workout} />
 							))}
 						</View>
@@ -47,7 +43,6 @@ export default function Workouts() {
 							<WorkoutItem
 								name="High Intensity Interval Training"
 								duration={30}
-								lastPerformed="Try it out!"
 							/>
 						</View>
 					</View>
