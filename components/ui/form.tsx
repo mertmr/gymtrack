@@ -176,7 +176,7 @@ type FormItemProps<T extends React.ElementType<any>, U> = Override<
 
 const FormInput = React.forwardRef<
 	React.ElementRef<typeof Input>,
-	FormItemProps<typeof Input, string>
+	FormItemProps<typeof Input, string | number>
 >(({ label, description, onChange, ...props }, ref) => {
 	const inputRef = React.useRef<React.ComponentRef<typeof Input>>(null);
 	const {
@@ -204,6 +204,11 @@ const FormInput = React.forwardRef<
 		}
 	}
 
+	const handleChange = (value: string) => {
+		const numericValue = !isNaN(parseFloat(value)) ? parseFloat(value) : value;
+		onChange(numericValue);
+	};
+
 	return (
 		<FormItem>
 			{!!label && (
@@ -221,7 +226,7 @@ const FormInput = React.forwardRef<
 						: `${formDescriptionNativeID} ${formMessageNativeID}`
 				}
 				aria-invalid={!!error}
-				onChangeText={onChange}
+				onChangeText={handleChange}
 				{...props}
 			/>
 			{!!description && <FormDescription>{description}</FormDescription>}
